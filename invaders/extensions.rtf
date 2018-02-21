@@ -1,0 +1,31 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Elizabeth Healy (eah255)\
+Date Completed:12/3/17\
+\
+Extensions:\
+\
+Multiple waves:\
+In this extension, I made it so that when the wave ended and entered STATE_COMPLETE, the player had the option to press \'91enter\'92 which would change the state to STATE_INACTIVE and change the text to the welcome screen text. They could then continue to play by pressing \'92s\'92. Additionally, I made an attribute of Invaders called _numWins which was initialized at 0. When the player successfully completed a wave, 1 was added to this attribute. This attribute was used to increase the speed of the aliens. I also added an attribute to the Wave class _alienSpeed. This was give the value provided by the parameter speed in the __init__. In the update of the Invaders class, when a new wave was created after the player pressed \'92s\'92 in STATE_INACTIVE, the parameter for speed was calculated: \
+self._wave=Wave(ALIEN_SPEED*(3/4)**self._numWins) \
+So the time between the alien steps decreases by 1/4 for each win the player has. Ex if the first speed is 1, then next will be 3/4, and the next 9/16, and the next 27/64 \'85\
+By using a factor of 3/4 instead of subtracting a constant ensures that the speed of the aliens will not drop below 0 if ALIEN_SPEED>0.\
+When the player breaks the win streak by losing a wave, the _numWins resets to 0.\
+The number of lives a player has resets to 3 with each new wave.\
+\
+\
+Sound Effects:\
+In this extension, I added sounds when the ship fires a bolt, when the aliens fire a bolt, when the aliens disapear, when the ship disappears, when the player wins the wave, and when the player loses the wave. All of the files\'92 names are stores in consts.py and all of the sounds are attributes. The code for the bolt sounds and the disappearing sounds are contained in wave.py. The code the sound for the firing of the alien bolt in contained in the method _fireAlienBolt, the code for the sound for the ship bolt is in update, the code for the sound for when the ship is destroyed is in _checkBoltColShip, and the sound for when the alien is destroyed is in _checkBoltColAlien. The code that plays the sounds for the win and loss is contained in app.py in the _completeState method. Wave.py has an attribute called _soundOn which is a boolean that keeps track of whether the sound is on or not. It is set using a parameter in the __init__ for wave. It can be changed using the non-hidden method switchSound(). App.py has an attribute called _soundStatus (bool) that helps keep track of whether the sound is on or off. If the _soundStatus is true then the win and lose sound effects play in the method _completeState.The _soundStatus also helps to keep track of whether the sound is on or off when a new wave is created; it is entered as the parameter for sound for the new Wave. The sound effects were slightly long so I added code that adjusted the volume of the win and lose sound effects, making them 0, when the user pressed enter to continue on with the game thus they would stop playing. App.py also has a label called _soundLabel that is displayed during STATE_ACTIVE and STATE_PAUSED and informs the user that they can turn the sound off by pressing M and on by pressing U. The methods in app.py, _wasMPressed and _wasUPressed, determine if U or M were  pressed and switches the sound from on to off and visa versa. They does this by calling the switchSound() method in Wave and by switching the _soundStatus attribute in app.py.\
+\
+CITATION: Both win.wav and Lose.wav are permitted for commercial use under Creative Commons Attribution 4.0 International Liscense\
+(found using creative commons)\
+\
+Other modifications:\
+I modified the text color, bolt color, and background.\
+\
+CITATION: background.png license: CCO 1.0 Universal Public Domain Dedication (found using creative commons)}
